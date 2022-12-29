@@ -25,6 +25,7 @@ public class URLController {
 
     @RequestMapping(value = "/shortener", method = RequestMethod.POST, consumes = {"application/json"})
     public String shortenUrl(@RequestBody @Valid final ShortenRequest shortenRequest) {
+        LOGGER.info("");
         return "TODO: https://medium.com/hackernoon/url-shortening-service-in-java-spring-boot-and-redis-d2a0f8848a1d";
     }
 }
