@@ -37,11 +37,9 @@ public class URLConverterService {
     private String formatLocalURLFromShortener(String localURL) {
         String[] addressComponents = localURL.split("/");
         // remove the endpoint (last index)
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < addressComponents.length - 1; ++i){
-            sb.append(addressComponents[i]);
-        }
-        sb.append('/');
-        return sb.toString();
+        String[] addressComponentsWithoutEndpoint = new String[addressComponents.length - 1];
+        System.arraycopy(addressComponents, 0, addressComponentsWithoutEndpoint, 0, addressComponents.length - 1);
+        String baseString = String.join("/", addressComponentsWithoutEndpoint);
+        return baseString + "/";
     }
 }

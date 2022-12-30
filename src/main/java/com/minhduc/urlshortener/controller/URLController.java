@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -30,9 +29,10 @@ public class URLController {
     @RequestMapping(value = "/shortener", method = RequestMethod.POST, consumes = {"application/json"})
     public String shortenUrl(@RequestBody @Valid final ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
           String longUrl = shortenRequest.getUrl();
-          LOGGER.info("Received url to shorten: " + longUrl);
+          LOGGER.info("Long url to shorten: " + longUrl);
           if (URLValidator.INSTANCE.validateURL(longUrl)){
               String localURL = request.getRequestURL().toString();
+              LOGGER.info("Local url to shorten: " + localURL);
               String shortenedURL = urlConverterService.shortenURL(localURL, longUrl);
               LOGGER.info("Shortened url to: " + shortenedURL);
               return shortenedURL;
@@ -46,7 +46,11 @@ public class URLController {
         LOGGER.debug("Received shortened url to redirect: " + id);
         String redirectUrlString = urlConverterService.getLongURLFromID(id);
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://" + redirectUrlString);
+        // Check if redirectUrlString includes http or https
+        if (!redirectUrlString.startsWith("http://") && !redirectUrlString.startsWith("https://")){
+            redirectUrlString = "http://" + redirectUrlString;
+        }
+        redirectView.setUrl(redirectUrlString);
         return redirectView;
     }
 }
