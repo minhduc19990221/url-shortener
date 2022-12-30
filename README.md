@@ -14,7 +14,7 @@
 POST http://localhost:8080/shortener 
 ```
 {
-	"url": "https://medium.com/hackernoon/url-shortening-service-in-java-spring-boot-and-redis-d2a0f8848a1d"
+	"url": "https://anything.com/you-can-include-its-id"
 }
 ```
 
