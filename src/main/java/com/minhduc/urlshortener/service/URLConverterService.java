@@ -1,6 +1,6 @@
 package com.minhduc.urlshortener.service;
 
-import com.minhduc.urlshortener.IDConverter;
+import com.minhduc.urlshortener.utils.IDConverter;
 import com.minhduc.urlshortener.repository.URLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

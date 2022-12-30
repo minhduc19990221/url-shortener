@@ -4,6 +4,7 @@ package com.minhduc.urlshortener.controller;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.minhduc.urlshortener.service.URLConverterService;
+import com.minhduc.urlshortener.utils.URLValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -30,11 +31,13 @@ public class URLController {
     public String shortenUrl(@RequestBody @Valid final ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
           String longUrl = shortenRequest.getUrl();
           LOGGER.info("Received url to shorten: " + longUrl);
-          String localURL = request.getRequestURL().toString();
-          String shortenedURL = urlConverterService.shortenURL(localURL, longUrl);
-          LOGGER.info("Shortened url to: " + shortenedURL);
-          return shortenedURL;
-          // throw new Exception("Please enter a valid URL");
+          if (URLValidator.INSTANCE.validateURL(longUrl)){
+              String localURL = request.getRequestURL().toString();
+              String shortenedURL = urlConverterService.shortenURL(localURL, longUrl);
+              LOGGER.info("Shortened url to: " + shortenedURL);
+              return shortenedURL;
+          }
+          throw new Exception("Please enter a valid URL");
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

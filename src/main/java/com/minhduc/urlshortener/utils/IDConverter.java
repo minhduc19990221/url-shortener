@@ -1,4 +1,4 @@
-package com.minhduc.urlshortener;
+package com.minhduc.urlshortener.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
