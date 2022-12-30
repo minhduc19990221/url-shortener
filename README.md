@@ -1,4 +1,4 @@
-# URL Shortener
+# :earth_asia: URL Shortener :earth_asia: 
 ## Integrated with Java Spring Boot and Redis
 
 *Quickly shorten a http or https url into localhost domain and redirect shortened to original url*
@@ -11,6 +11,7 @@
 - The Simple Logging Facade for Java (SLF4J)
 
 **Available API**
+
 POST http://localhost:8080/shortener 
 ```
 {
@@ -22,7 +23,7 @@ GET http://localhost:8080/:id
 
 ### Development Phase
 
-- [x] Initialize URL Shortener and core functionalities (validator, redirection, shortening, redis)
-- [ ] Add authentication (JWT)
-- [ ] Integrate CI/CD (Dockerize, AWS)
-- [ ] Host a domain (nginx)
+- [x] Initialize URL Shortener and core functionalities (validator, redirection, shortening, redis) :minibus:
+- [ ] Add authentication (JWT) :closed_lock_with_key:
+- [ ] Integrate CI/CD (Dockerize, AWS) :whale:
+- [ ] Host a domain (nginx) :computer:
